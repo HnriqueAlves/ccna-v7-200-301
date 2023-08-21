@@ -1,0 +1,40 @@
+interface Vlan1
+ description Interface de Gerenciamento do Switch SW-L3-3560-1
+ ip address 192.168.3.252 255.255.255.0
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+ip access-list extended sl_def_acl
+ deny tcp any any eq telnet
+ deny tcp any any eq www
+ deny tcp any any eq 22
+ permit tcp any any eq 22
+!
+banner motd ^CAVISO: acesso autorizado somente a funcionarios^C
+!
+!
+!
+!
+!
+line con 0
+ exec-timeout 5 30
+ password 7 08701E1D290A00191308
+ logging synchronous
+ login local
+!
+line aux 0
+!
+line vty 0 4
+ exec-timeout 5 30
+ password 7 08701E1D290A00191308
+ logging synchronous
+ login local
+ transport input ssh
+!
+!
+!
+!
+end
